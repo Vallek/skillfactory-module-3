@@ -1,41 +1,57 @@
+/* Обратите внимание, что названия шрифта при подключении должны соответствоать тому, как шрифты указаны в Google Fonts. То есть одно название, разный вес и стиль. Если что-то случится с локальными шрифтами, сработают удаленные. */
 @font-face {
-	src: url('../fonts/OpenSans-Regular.ttf');
-	font-family: 'OpenSans Regular';
+	src: url('../fonts/OpenSans-Regular.ttf') format('truetype');
+	font-family: 'Open Sans';
+	font-weight: 400;
+	font-style: normal;
 }
 
 @font-face {
-	src: url('../fonts/OpenSans-Italic.ttf');
-	font-family: 'OpenSans Italic';
+	src: url('../fonts/OpenSans-Italic.ttf') format('truetype');
+	font-family: 'Open Sans';
+	font-weight: 400;
+	font-style: italic;
 }
 
 @font-face {
-	src: url('../fonts/OpenSans-Bold.ttf');
-	font-family: 'OpenSans Bold';
+	src: url('../fonts/OpenSans-SemiBold.ttf') format('truetype');
+	font-family: 'Open Sans';
+	font-weight: 600;
+	font-style: normal;
 }
 
 @font-face {
-	src: url('../fonts/OpenSans-SemiBold.ttf');
-	font-family: 'OpenSans SemiBold';
+	src: url('../fonts/OpenSans-Bold.ttf') format('truetype');
+	font-family: 'Open Sans';
+	font-weight: 700;
+	font-style: normal;
 }
 
 @font-face {
-	src: url('../fonts/OpenSans-ExtraBold.ttf');
-	font-family: 'OpenSans ExtraBold';
+	src: url('../fonts/OpenSans-ExtraBold.ttf') format('truetype');
+	font-family: 'Open Sans';
+	font-weight: 800;
+	font-style: normal;
 }
 
-body {
+/* Здесь используется более элегантный способ прижать футер, чем тот, на который у вас была ссылка. Кроме последних трех свойств для body нужно задать только flex-grow: 1 для main и всё. Разметку при этом трогать не нужно. */
+.page {
 	margin: 0;
-	font-family: 'OpenSans Regular', Helvetica, Arial, sans-serif;
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
-/* Main Blocks */
+/* Main Sections */
+/* По БЭМу да и вообще не рекомендуется так объединять селекторы. В данном случае я уверен, что ничего не поменяется. Но в реальности так не бывает:) */
 .intro,
 .services,
-.feature-products,
+.feature,
 .team,
 .subscribe,
-.feedback-contacts-wrapper,
-.footer-wrapper {
+.get-in-touch__body,
+.footer__content {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
@@ -46,16 +62,16 @@ body {
 	padding-right: 1vw;
 }
 
-main {
-	overflow: hidden;
-	/* Это свойство скрывает переполнение. В этом макете это нужно, чтобы декоративная подложка в разделе контактов не выходила за край. Вообще-то это не самая лучшая практика, потому что она не решает проблему, а скрывает. В данном случае это ни на что не влияет, но в реальных проектах лучше найти решение проблемы. */
+.page__content {
+	flex-grow: 1;
 }
 
 h2 {
 	color: #585858;
 	/* Хотя в макете цвет текста заголовков и других элементов достигается прозрачностью, в браузере такое значение даст другой результат. Другой вариант: взять цвет в фотошопе пипеткой. */
 	margin: 0;
-	font-family: 'OpenSans Bold';
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-weight: 600;
 	font-size: 42px;
 	line-height: 55px;
 	text-transform: uppercase;
@@ -67,17 +83,20 @@ h3 {
 
 p {
 	margin: 0;
-	font-family: 'OpenSans Regular';
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	font-size: 16px;
-	line-height: 28px;
+	line-height: 1.75;
 }
 
-.header-out-wrapper,
-.intro-out-wrapper {
+.page__header_grey {
 	background-color: #e0e0e0;
 }
 
-.header-line {
+.page__intro_grey {
+	background-color: #e0e0e0;
+}
+
+.header__line {
 	width: 122px;
 	height: 3px;
 	background-color: #ff2d2d;
@@ -85,10 +104,10 @@ p {
 }
 
 /* Header */
-header {
+.header {
 	box-sizing: border-box;
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	justify-content: center;
 	max-width: 1249px;
 	margin: 0 auto;
@@ -96,25 +115,41 @@ header {
 	background-color: #000000;
 }
 
-.site-menu {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	position: relative;
-	right: 20px;
+.page__header {
+	padding-top: 29px;
 }
 
-.site-menu > a {
-	padding: 39px 30px 30px;
+.menu {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	list-style: none;
+	padding: 0;
+	margin: 0;	
+	margin-left: -20px;
+	/* Сдвигать элементы можно не только позиционированием, но и отрицательными отступами. В каких случаях, что использовать читайте по ссылке https://www.smashingmagazine.com/2009/07/the-definitive-guide-to-using-negative-margins/ */
+}
+
+.menu__item {
+	display: flex;
+	align-items: stretch;
+	justify-content: center;
+	min-height: 89px;
+}
+
+.menu__item:hover {
+	background-color: #ff3f40;
+}
+
+.menu__link {
+	display: flex;
+	align-items: center;
+	padding: 0 30px;
 	color: #e0e0e0;
 	font-size: 14px;
 	font-weight: bold;
 	text-decoration: none;
 	text-transform: uppercase;
-}
-
-.site-menu > a:hover {
-	background-color: #ff3f40;
 }
 
 /* Intro */
@@ -124,48 +159,46 @@ header {
 	padding-bottom: 94px;
 }
 
-.intro-wrapper {
+.intro__content {
 	position: relative;
     bottom: 11px;
 	width: 617px;
-	vertical-align: top;
 	margin-bottom: 20px;
 	margin-right: 75px;
 }
 
-.intro-heading {
+.intro__heading {
 	margin: 0;
 	font-size: 60px;
-	line-height: 1.2em;
-	/* Чтобы высота строки оставалась пропорциональной разному размеру шрифта, можно указать ее в относительных единицах em. Они зависят от размера шрифта. */
+	line-height: 1.2;
+	/* Чтобы высота строки оставалась пропорциональной разному размеру шрифта, можно указать ее без единиц измерения. Тогда она бужет зависеть от размера шрифта. */
 	font-weight: bold;
 	text-transform: uppercase;
 	margin-bottom: 18px;
-	font-family: 'OpenSans ExtraBold';
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-weight: 800;
 	letter-spacing: 1.5px;
 	/* Свойство letter-spacing позволяет изменить межбуквенное расстояние. */
 }
 
-.intro-heading > .style-text {
+.intro__heading_style {
 	letter-spacing: 6px;
 	word-break: break-word;
 	hyphens: auto;
-	/* Свойство word-break заставляет слова переноситься по буквам, если они не помещаются в родительский элемент.*/
+	/* Свойство word-break заставляет слова переноситься по буквам, если они не помещаются в родительский элемент.
+	Свойство hyphens добавляет дефис в месте переноса (может работать не во всех браузерах) */
 }
 
-.intro-text {
+.intro__text {
 	max-width: 520px;
 	margin-bottom: 51px;
 	opacity: 0.7; 
 }
 
-.contact-link {
+.action-button {
 	box-sizing: border-box;
-	color: #ffffff;
-	font-size: 18px;
-	font-family: 'OpenSans Bold';
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	display: inline-block;
-	background-color: #ff3f40;
 	width: 227px;
 	padding: 16px 0;
 	text-align: center;
@@ -173,11 +206,18 @@ header {
 	border-radius: 5px;
 }
 
-.intro-image {
+.action-button_red {
+	font-size: 18px;
+	font-weight: 700;
+	color: #ffffff;
+	background-color: #ff2d2d;
+}
+
+.intro__image {
 	width: 551px;
 	height: 356px;
 	box-shadow: 0 -10px 40px 0 rgb(124, 124, 124);
-	/* Свойство box-shadow позволяет создать тень бокса. Первые два значения - смещение по горизонтали и вертикали. Третье - размытие. Четвертое - распространение. И цвет. */
+	/* Свойство box-shadow позволяет создать тень бокса. Первые два значения - смещение по горизонтали и вертикали. Третье - размытие. Четвертое - распространение. Пятое цвет. */
 }
 
 /* Services */
@@ -187,37 +227,32 @@ header {
 	border-bottom: 1px solid #ececec;
 }
 
-.services-lead-wrapper {
+.services__lead {
 	flex: 1 1 502px;
-	/* Свойство flex совмещает в себе три свйоства grow shrink и basis. Первые два позволяют сказать, что флекс элемент может расширятсья и сжиматься. Третье задает базовую ширину, которая расчитывается до всего остального */
+	/* Свойство flex совмещает в себе три свойства grow, shrink и basis. Первые два позволяют сказать, что флекс элемент может расширятсья и сжиматься. Третье задает базовую ширину, которая расчитывается до всего остального. */
 	max-width: 502px;
 	margin-bottom: 50px;
 	margin-right: 50px;
 }
 
-.services-heading {
+.services__heading {
 	position: relative;
     bottom: 5px;
 	margin-bottom: 27px;
 }
 
-.services-text {
+.services__text {
 	margin-bottom: 51px;
 }
 
-.services-link {
+.action-button_white {
+	font-size: 15px;
 	color: #ff3f40;
-	display: inline-block;
 	background-color: #ffffff;
-	width: 227px;
-	padding: 16px 0;
 	border: 2px solid #ff3f40;
-	border-radius: 5px;
-	text-align: center;
-	text-decoration: none;
 }
 
-.services-wrapper {
+.services__blocks {
 	flex: 1 1;
 	max-width: 609px;
 	display: flex;
@@ -234,64 +269,65 @@ header {
 	margin-right: 32px;
 }
 
-.service > h3 {
+.service__heading {
 	letter-spacing: 1.5px;
-	font-family: 'OpenSans SemiBold';
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-weight: 600;
 	font-size: 22px;
 	margin-bottom: 10px;
 }
 
-.service > h3::before {
+.service__heading::before {
 	display: block;
 	width: 41px;
 	height: 41px;
 	margin-bottom: 23px;
 }
 
-.service > p {
+.service__text {
 	opacity: 0.7;
 }
 
-.service > .management::before {
+.service__heading_manage::before {
 	content: url('../images/service-1.png');
 }
 
-.service > .ux::before {
+.service__heading_ux::before {
 	content: url('../images/service-2.png');
 }
 
-.service > .branding::before {
+.service__heading_brand::before {
 	content: url('../images/service-3.png');
 }
 
-.service > .animation::before {
+.service__heading_anim::before {
 	content: url('../images/service-4.png');
 }
 
 /* Feature products */
-.feature-products {
+.feature {
 	padding-top: 94px;
 	padding-bottom: 52px
 }
 
-.feature-header {
+.feature__header {
 	width: 100%;
 	text-align: center;
 	margin-bottom: 67px;
 }
 
-.feature-heading {
+.feature__heading {
 	padding-left: 14px;
 	margin-bottom: 16px;
 }
 
-.feature-text {
+.feature__text {
 	max-width: 500px;
 	margin: 0 auto 30px;
 	opacity: 0.7;
 }
 
-.products-filter {
+.products__filter {
 	width: 100%;
 	list-style: none;
 	margin: 0;
@@ -302,28 +338,29 @@ header {
 	margin-bottom: 60px;
 }
 
-.products-filter a {
+.products__link {
 	position: relative;
     left: 45px;
 	color: #000;
 	margin-right: 55px;
 	font-size: 22px;
-	font-family: 'OpenSans SemiBold';
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-weight: 600;
 	text-transform: uppercase;
 	text-decoration: none;
 	opacity: 0.7;
 }
 
-.products-filter a.active {
+.products__link_active {
 	color: #ff2d2d;
 	opacity: 1;
 }
 
-.products-filter a:hover {
+.products__link:hover {
 	color: #ff2d2d;
 }
 
-.products-wrapper {
+.products {
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
@@ -346,77 +383,85 @@ header {
 	padding-bottom: 110px;
 }
 
-.team-header {
+.team__header {
 	width: 100%;
 	text-align: left;
 	margin-bottom: 67px;
 }
 
-.team-heading {
+.team__heading {
 	margin-bottom: 23px;
 }
 
-.team-text {
+.team__text {
 	max-width: 460px;
 	margin-bottom: 30px;
 }
 
-.team-line {
+.team__line {
 	margin-left: 0;
 }
 
-.team-members-wrapper {
+.team__members {
+	position: relative;
 	width: 100%;
 	display: flex;
 	align-items: flex-end;
 	flex-wrap: wrap;
-	position: relative;
+	min-height: 458px;
+    align-content: space-between;
 }
 
-.main-member-photo {
+.team__selected {
+	position: relative;
+    display: flex;
+    flex-direction: column;
+	max-width: 642px;
+	margin-left: calc(321px + 65px);
+}
+
+.selected-member__name {
+	position: relative;
+    bottom: 5px;
+	font-size: 30px;
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-weight: 600;
+	text-transform: uppercase;
+	opacity: 0.8;
+	margin-bottom: 16px;
+}
+
+.selected-member__photo {
+	position: absolute;
+	transform: translateX(calc(-100% - 65px));
 	width: 321px;
 	height: 458px;
 	margin-right: 65px;
 	background-color: #eb6d4a8f;
 }
 
-.main-member-info {
-	position: absolute;
-	max-width: 642px;
-	top: 5px;
-	left: 393px;
-}
-
-.main-member-info > h3 {
-	position: relative;
-    bottom: 5px;
-	font-size: 30px;
-	font-family: 'OpenSans SemiBold';
-	text-transform: uppercase;
-	opacity: 0.8;
-	margin-bottom: 16px;
-}
-
-.member-social-links > a {
+.selected-member__link {
 	color: #000;
 	font-size: 18px;
-	font-family: 'OpenSans Italic';
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-style: italic;
 	text-decoration: none;
 	margin-right: 30px;
 } 
 
-.member-social-links > a:hover {
+.selected-member__link:hover {
 	text-decoration: underline;
 }
 
-.main-member-info > p {
+.selected-member__info {
 	margin-bottom: 34px;
 }
 
-.members-wrapper {
+.members {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
+	margin-left: calc(321px + 65px);
 }
 
 .member {
@@ -425,7 +470,10 @@ header {
 	margin-right: 18px;
 }
 
-.member > h3 {
+.member__name {
+	display: flex;
+    justify-content: center;
+    align-items: center;
 	visibility: hidden;
 	color: #ffffff;
 	position: absolute;
@@ -437,11 +485,11 @@ header {
 	opacity: 0.5;
 }
 
-.member:hover > h3 {
+.member:hover > .member__name {
 	visibility: visible;
 }
 
-.member-photo {
+.member__photo {
 	display: block;
 	width: 197px;
 	height: 214px;
@@ -459,55 +507,53 @@ header {
 	padding-bottom: 140px;
 }
 
-.subscribe-wrapper {
+.subscribe__header {
 	max-width: 1249px;
 	margin: 0 auto;
 	text-align: center;
 }
 
-.subscribe-heading {
+.subscribe__heading {
 	color: #fff;
 	opacity: 0.8;
 	text-transform: none;
 	margin-bottom: 30px;
 }
 
-.subscribe-wrapper > p {
+.subscribe__text {
 	color: #fff;
 	opacity: 0.8;
 	margin-bottom: 50px;
 }
 
-.subscribe-form {
+.subscribe__form {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.subscribe-form > .email-input {
-	color: grey;
+.subscribe__form .subscribe__input {
 	display: flex;
 	align-items: center;
-	background-color: #fff;
 	box-sizing: border-box;
 	flex: 0 1 521px;
-	max-width: 521px;
 	min-height: 79px;
 	padding: 0;
 	padding-left: 35px;
 	border: none;
 	border-radius: 5px;
 	margin-right: 22px;
+	background-color: #fff;
 }
 
-.subscribe-form > .subscribe-button {
+.subscribe__form .subscribe__button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	text-decoration: none;
 	color: #fff;
 	font-size: 18px;
-	font-family: 'OpenSans Bold';
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-weight: 700;
 	width: 214px;
 	min-height: 79px;
 	background-color: #ff2d2d;
@@ -516,44 +562,61 @@ header {
 	text-transform: uppercase;
 }
 
-/* Feedback */
-.feedback-contacts-wrapper {
-	position: relative;
-	display: flex;
-	align-items: flex-end;
-	flex-wrap: nowrap;
+.get-in-touch__header {
+	box-sizing: border-box;
+	max-width: 1249px;
+	margin: 0 auto;
+	padding-left: 1vw;
+	padding-right: 1vw;
+	width: 100%;
 	padding-top: 92px;
-	padding-bottom: 110px;
 }
 
-.feedback {
-	max-width: 731px;
-	margin-right: 107px;
-}
-
-.feedback > h2 {
+.get-in-touch__heading {
 	margin-bottom: 34px;
 }
 
-.feedback > p {
+.get-in-touch__text {
 	max-width: 720px;
 	margin-bottom: 50px;
 }
 
-.feedback-line {
+.get-in-touch__line {
 	margin-left: 0;
 	margin-bottom: 75px;
 }
 
-.feedback-form {
+/* Feedback */
+.get-in-touch__body {
+	position: relative;
+	display: flex;
+	align-items: flex-end;
+	flex-wrap: nowrap;
+	/* padding-top: 92px; */
+	padding-bottom: 110px;
+	width: 100%;
+    max-width: 100%;
+    align-items: stretch;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.get-in-touch__left-box {
+	flex: 1 1 auto;
+}
+
+.get-in-touch__feedback {
+	max-width: 731px;
+	margin-right: 107px;
+	padding-left: 40px;
+}
+
+.feedback__form {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.feedback-form > div {
-	color: grey;
-	display: flex;
-	align-items: center;
+.feedback__input {
 	box-sizing: border-box;
 	padding-left: 54px;
 	border: none;
@@ -562,45 +625,47 @@ header {
 	margin-bottom: 45px;
 }
 
-.feedback-form > .name-input,
-.feedback-form > .email-input {
+.feedback__name,
+.feedback__mail {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
 	width: 339px;
 	max-width: 339px;
 	height: 69px;
+	background-color: #f3f3f3;
 }
 
-.feedback-form > .name-input {
+.feedback__name {
 	margin-right: 53px;
 }
 
-.feedback-form > .message-input {
+.feedback__message {
 	resize: none;
 	font-size: 16px;
-	font-family: 'OpenSans Regular';
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	width: 731px;
 	max-width: 731px;
 	height: 249px;
 	box-sizing: border-box;
-	padding-top: 35px;
-	padding-left: 54px;
-	padding-bottom: 150px;
+	padding: 35px 54px;
 	margin-bottom: 45px;
 	border: none;
 	border-radius: 5px;
 	background-color: #f3f3f3;	
 }
 
-.feedback-form > .send-button {
+.feedback__button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	text-decoration: none;
 	width: 731px;
 	max-width: 731px;
 	height: 72px;
 	color: #fff;
 	font-size: 18px;
-	font-family: 'OpenSans Bold';
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-weight: 700;
 	background-color: #ff2d2d;
 	border: none;
 	border-radius: 5px;
@@ -608,30 +673,37 @@ header {
 } 
 
 /* Contacts */
-.contacts {
+.get-in-touch__contacts {
 	position: relative;
 	color: #e0e0e0;
 	background-color: #2c2c2c;
 	padding: 125px 78px;
+	max-width: 290px;
 }
 
-.contacts > h2 {
+.contacts__heading {
 	color: #e0e0e0;
 	font-size: 18px;
-}
-
-.contacts > h2 {
 	margin-bottom: 13px;
 }
 
 .contacts-address {
-	line-height: 28px;
+	line-height: 1.75;
 }
 
-.contacts-address > p {
+.contacts__line {
 	margin-bottom: 17px;
 }
 
+.get-in-touch__right-box {
+	flex: 1 1 auto;
+}
+
+.contacts__decor {
+	background-color: #2c2c2c;
+}
+
+/* Ниже идут два других варианта создания этой декоративной части */
 .contacts-background {
 	position: absolute;
 	z-index: -1;
@@ -643,7 +715,7 @@ header {
 }
 
 .contacts::after {
-	content: '';
+	/* content: ''; */
 	display: block;
 	position: absolute;
 	top: 0;
@@ -651,18 +723,18 @@ header {
 	transform: translateX(100%);
 	/* Свойство transform позволяет изменять внешний вид элементов. Значение translate сдвигает элемент по осям X, Y или по обеим сразу. Его особенность - проценты расчитываются не от размеров родителя, а от самого элемента. При этом такой сдвинутый элемент не участвует в потоке. */
 	width: 100vw;
-	height: 481px;
+	height: 100%;
 	background-color: #2c2c2c;
 }
 /* Второй способ сделать темную подложку - создать пустой псевдоэлемент, стилизовать его и тоже исопльзовать позиционирование. Этот подход лучше тем, что вам не нужно изменять HTML. Сейчас работает этот способ, поэтому элемент в HTML отключен. */
 
 /* Footer */
-footer {
+.footer {
 	background-color: #2c2c2c;
 	padding: 0 1vw;
 }
 
-.footer-wrapper {
+.footer__content {
 	box-sizing: border-box;
 	padding: 19px 0 0;
 	color: #e0e0e0;
@@ -673,7 +745,7 @@ footer {
 	background-color: #2c2c2c;
 }
 
-.footer-social-links > a:not(:last-child) {
+.footer__social-links > .footer__link:not(:last-child) {
 	margin-right: 18px;
 }
 
@@ -682,36 +754,37 @@ footer {
 	.intro {
 		flex-wrap: nowrap;
 	}
-	.intro-wrapper {
+	.intro__content {
 		width: 50%;
 		box-sizing: border-box;
 		margin-right: 0;
 		padding-right: 15px;
 	}
-	.intro-heading {
+	.intro__heading {
 		font-size: 5vw;
 	}
-	.intro-image-link {
+	.intro__image-link {
 		width: 50%;
-		height: auto;
 	}
-	.intro-image {
+	.intro__image {
 		width: 100%;
 		height: auto;
 	}
-	.products-wrapper {
+	.products {
 		justify-content: flex-start;
 	}
 	.product {
-		width: 299px;
 		max-width: 100%;
-		/* height: auto; */
 		margin-right: 1vw;
 	}
-	.feedback-contacts-wrapper {
+	.get-in-touch__body {
 		flex-wrap: wrap;
 		padding-left: initial;
-    	padding-right: initial;
+		padding-right: initial;
+		padding-bottom: 0;
+	}
+	.get-in-touch__left-box {
+		flex: 0 1 auto;
 	}
 	.feedback {
 		margin: 0 auto;
@@ -728,29 +801,48 @@ footer {
 }
 
 @media screen and (max-width: 900px) {
-	.main-member-info {
+	.selected-member {
 		position: initial;
 	}
-	.products-filter > li {
+	.products__item {
 		width: 100%;
 		text-align: center;
 	}
 	.services {
 		justify-content: center;
 	}
-	.services-lead-wrapper,
-	.services-wrapper {
+}
+
+@media screen and (max-width: 907px) {
+	.services-lead,
+	.services__blocks {
 		width: 100%;
 		max-width: 100%;
 	}
 }
 
+@media screen and (max-width: 855px) {
+	.selected-member {
+		margin-left: 0;
+		margin-bottom: 1.5rem;
+	}
+	.selected-member__photo {
+		position: initial;
+		margin-right: 0;
+		transform: initial;
+		margin-bottom: 1rem;
+	}
+	.members {
+		margin-left: 0;
+	}
+} 
+
 @media screen and (max-width: 800px) {
-	.services-lead-wrapper {
+	.services-lead {
 		width: 100%;
 		max-width: 100%;
 	}
-	.services-wrapper {
+	.services__blocks {
 		width: 100%;
 		max-width: 100%;
 	}
@@ -760,42 +852,42 @@ footer {
 }
 
 @media screen and (max-width: 760px) {
-	.feedback-form > .name-input,
-	.feedback-form > .email-input,
-	.feedback-form > .message-input,
-	.feedback-form > .send-button {
+	.feedback__name,
+	.feedback__mail,
+	.feedback__message,
+	.feedback__button {
 		width: 100%;
 		max-width: 100%;
 	}
-	.feedback-form > .name-input {
+	.feedback__name {
 		margin-right: 0;
 	}
 }
 
 @media screen and (max-width: 700px) {
-	header {
+	.header {
 		padding-left: 20px;
 	}
 	.intro {
 		flex-wrap: wrap;
 	}
-	.intro-wrapper {
+	.intro__content {
 		width: 100%;
 	}
-	.intro-image-link {
+	.intro__image-link {
 		width: 100%;
 	}
-	.intro-image {
+	.intro__image {
 		width: 100%;
 		height: auto;
 	}
-	.intro-heading {
+	.intro__heading {
 		font-size: 50px;
 	}
 }
 
 @media screen and (max-width: 400px) {
-	.subscribe-form {
+	.subscribe__form {
 		flex-wrap: wrap;
 	}
 }
