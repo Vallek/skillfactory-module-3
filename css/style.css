@@ -533,6 +533,7 @@ p {
 }
 
 .subscribe__form .subscribe__input {
+	color: #8e8e8e;
 	display: flex;
 	align-items: center;
 	box-sizing: border-box;
@@ -617,6 +618,7 @@ p {
 }
 
 .feedback__input {
+	color: #8e8e8e;
 	box-sizing: border-box;
 	padding-left: 54px;
 	border: none;
