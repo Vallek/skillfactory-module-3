@@ -633,7 +633,6 @@ p {
 	align-items: center;
 	font-size: 16px;
 	width: 339px;
-	max-width: 339px;
 	height: 69px;
 	background-color: #f3f3f3;
 }
@@ -647,7 +646,6 @@ p {
 	font-size: 16px;
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	width: 731px;
-	max-width: 731px;
 	height: 249px;
 	box-sizing: border-box;
 	padding: 35px 54px;
@@ -662,7 +660,6 @@ p {
 	align-items: center;
 	justify-content: center;
 	width: 731px;
-	max-width: 731px;
 	height: 72px;
 	color: #fff;
 	font-size: 18px;
@@ -859,7 +856,6 @@ p {
 	.feedback__message,
 	.feedback__button {
 		width: 100%;
-		max-width: 100%;
 	}
 	.feedback__name {
 		margin-right: 0;
