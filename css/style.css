@@ -50,7 +50,7 @@
 .feature,
 .team,
 .subscribe,
-.get-in-touch__body,
+.feedback__body,
 .footer__content {
 	display: flex;
 	flex-wrap: wrap;
@@ -564,37 +564,39 @@ p {
 	text-transform: uppercase;
 }
 
-.get-in-touch__header {
-	box-sizing: border-box;
-	max-width: 1249px;
-	margin: 0 auto;
-	padding-left: 1vw;
-	padding-right: 1vw;
-	width: 100%;
+/* Feedback contacts */
+.feedback-contacts {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
 	padding-top: 92px;
+	padding-bottom: 110px;
 }
 
-.get-in-touch__heading {
+/* Feedback */
+.feedback__header {
+	box-sizing: border-box;
+}
+
+.feedback__heading {
 	margin-bottom: 34px;
 }
 
-.get-in-touch__text {
+.feedback__text {
 	max-width: 720px;
 	margin-bottom: 50px;
 }
 
-.get-in-touch__line {
+.feedback__line {
 	margin-left: 0;
 	margin-bottom: 75px;
 }
 
-/* Feedback */
-.get-in-touch__body {
+.feedback__body {
 	position: relative;
 	display: flex;
 	align-items: flex-end;
 	flex-wrap: nowrap;
-	padding-bottom: 110px;
 	width: 100%;
     max-width: 100%;
     align-items: stretch;
@@ -602,14 +604,13 @@ p {
     padding-right: 0;
 }
 
-.get-in-touch__left-box {
+.feedback__left-box {
 	flex: 1 1 auto;
 }
 
-.get-in-touch__feedback {
+.feedback__feedback {
 	max-width: 731px;
 	margin-right: 107px;
-	padding-left: 40px;
 }
 
 .feedback__form {
@@ -647,7 +648,7 @@ p {
 	font-size: 16px;
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	width: 731px;
-	height: 249px;
+	height: 252px;
 	box-sizing: border-box;
 	padding: 35px 54px;
 	margin-bottom: 45px;
@@ -673,12 +674,15 @@ p {
 } 
 
 /* Contacts */
-.get-in-touch__contacts {
+.contacts {
+	box-sizing: border-box;
 	position: relative;
 	color: #e0e0e0;
 	background-color: #2c2c2c;
-	padding: 125px 78px;
-	max-width: 290px;
+	box-sizing: border-box;
+	padding: 125px 53px 125px 78px;
+	min-height: 481px;
+	max-width: 411px;
 }
 
 .contacts__heading {
@@ -695,7 +699,8 @@ p {
 	margin-bottom: 17px;
 }
 
-.get-in-touch__right-box {
+.feedback__right-box {
+	min-height: 481px;
 	flex: 1 1 auto;
 }
 
@@ -777,13 +782,13 @@ p {
 		max-width: 100%;
 		margin-right: 1vw;
 	}
-	.get-in-touch__body {
+	.feedback-contacts {
 		flex-wrap: wrap;
 		padding-left: initial;
 		padding-right: initial;
 		padding-bottom: 0;
 	}
-	.get-in-touch__left-box {
+	.feedback__left-box {
 		flex: 0 1 auto;
 	}
 	.feedback {
