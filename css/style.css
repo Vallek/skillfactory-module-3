@@ -474,6 +474,10 @@ p {
 	margin-right: 18px;
 }
 
+.member:not(:last-child) {
+	margin-right: 18px;
+}
+
 .member__name {
 	display: flex;
     justify-content: center;
