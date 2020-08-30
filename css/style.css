@@ -403,25 +403,43 @@ p {
 }
 
 .team__members {
-	position: relative;
 	width: 100%;
 	display: flex;
-	align-items: flex-end;
-	flex-wrap: wrap;
-	min-height: 458px;
+	align-items: stretch;
     align-content: space-between;
+	min-height: 458px;
 }
 
-.team__selected {
+.team__selected-photo {
+	flex-shrink: 0;
+	width: 321px;
+	height: 458px;
+	margin-right: 65px;
+	background-color: #eb6d4a8f;
+	align-self: start;
+}
+
+.team__main-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.team__selected-info {
 	position: relative;
     display: flex;
-    flex-direction: column;
+	flex-direction: column;
+	align-self: start;
+    justify-content: space-between;
 	max-width: 642px;
-	margin-left: calc(321px + 65px);
+	margin-top: -7px;
 }
 
-.selected-member__name {
-	position: relative;
+.team__selected-about {
+	margin-bottom: 34px;
+}
+
+.team__selected-name {
     bottom: 5px;
 	font-size: 30px;
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -431,16 +449,7 @@ p {
 	margin-bottom: 16px;
 }
 
-.selected-member__photo {
-	position: absolute;
-	transform: translateX(calc(-100% - 65px));
-	width: 321px;
-	height: 458px;
-	margin-right: 65px;
-	background-color: #eb6d4a8f;
-}
-
-.selected-member__link {
+.team__selected-link {
 	color: #000;
 	font-size: 18px;
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -449,19 +458,14 @@ p {
 	margin-right: 30px;
 } 
 
-.selected-member__link:hover {
+.team__selected-link:hover {
 	text-decoration: underline;
-}
-
-.selected-member__info {
-	margin-bottom: 34px;
 }
 
 .members {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-	margin-left: calc(321px + 65px);
 }
 
 .member {
@@ -819,10 +823,15 @@ p {
 	}
 }
 
-@media screen and (max-width: 900px) {
-	.selected-member {
-		position: initial;
+@media screen and (max-width: 907px) {
+	.services-lead,
+	.services__blocks {
+		width: 100%;
+		max-width: 100%;
 	}
+}
+
+@media screen and (max-width: 900px) {
 	.products__item {
 		width: 100%;
 		text-align: center;
@@ -832,27 +841,14 @@ p {
 	}
 }
 
-@media screen and (max-width: 907px) {
-	.services-lead,
-	.services__blocks {
-		width: 100%;
-		max-width: 100%;
-	}
-}
-
 @media screen and (max-width: 855px) {
-	.selected-member {
-		margin-left: 0;
-		margin-bottom: 1.5rem;
+	.team__members {
+		display: flex;
+		flex-wrap: wrap;
 	}
-	.selected-member__photo {
-		position: initial;
+	.team__selected-photo {
+		margin-bottom: 18px;
 		margin-right: 0;
-		transform: initial;
-		margin-bottom: 1rem;
-	}
-	.members {
-		margin-left: 0;
 	}
 } 
 
